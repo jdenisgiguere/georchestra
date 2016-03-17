@@ -1,15 +1,20 @@
 /*
- * Copyright (C) Camptocamp
+ * Copyright (C) 2009-2016 by the geOrchestra PSC
  *
- * This file is part of geOrchestra
+ * This file is part of geOrchestra.
  *
- * geOrchestra is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * geOrchestra is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
  *
- * You should have received a copy of the GNU General Public License
- * along with geOrchestra.  If not, see <http://www.gnu.org/licenses/>.
+ * geOrchestra is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * geOrchestra.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 Ext.namespace("GEOR");
@@ -96,49 +101,6 @@ GEOR.config = (function() {
         ],
 
         /***** Beginning of config options which can be overriden by GEOR.custom *****/
-
-        /**
-         * Constant: ADDONS
-         * An array of addons config objects.
-         * Defaults to []
-         *
-         * An "addon config object" is an object with the following properties:
-         *  id - {String} required identifier, which *MUST* :
-         *        * be stable across deployments in order to let your users recover their tools
-         *        * be unique in the ADDONS array
-         *  name - {String} required addon name, which, once lowercased, gives the addon folder name
-         *  title - {Object} a required hash storing addon titles by lang key
-         *  description - {Object} a required hash storing addon descriptions by lang key
-         *  roles - {Array} optional array of roles allowed to use this addon - defaults to [], which means everyone is allowed to.
-         *          eg: ["ROLE_SV_ADMIN"] will allow the current addon for admin users only
-         *  group - {String} an optional group for mutual exclusion between activated tools - default group is "tools"
-         *  options - {Object} an optional config object which overrides the package default_options (in manifest.json)
-         *  thumbnail - {String} an optional thumbnail path, relative to app/addons/{addon_name.toLowerCase()}/ (defaults to img/icon.png)
-         *
-         */
-        ADDONS: getCustomParameter("ADDONS",
-            []),
-
-        /**
-         * Constant: CONTEXTS
-         * {Array} the array describing the available contexts
-         *
-         * Each "context object" consists of 5 mandatory fields:
-         *   * the label which appears in the UI
-         *   * the path to the thumbnail
-         *   * the path to the context (WMC) file
-         *   * the comment which will be shown on thumbnail hovering
-         *   * the keywords used to filter the view
-         *
-         * Should *not* be empty !
-         */
-        CONTEXTS: getCustomParameter("CONTEXTS", [{
-            label: "OpenStreetMap",
-            thumbnail: "app/img/contexts/osm.png",
-            wmc: "default.wmc",
-            tip: "A unique OSM layer",
-            keywords: ["OpenStreetMap", "Basemap"]
-        }]),
 
         /**
          * Constant: GEOSERVER_WFS_URL
@@ -250,11 +212,9 @@ GEOR.config = (function() {
          * Key (as the one in the response from /geonetwork/srv/fre/xml.thesaurus.getList)
          * of the thesaurus to use as the default (selected) one.
          *
-         * local.theme.test is the only one exported by GeoNetwork by default.
-         * It is highly recommended to upload new thesauri and to change this setting.
          */
         DEFAULT_THESAURUS_KEY: getCustomParameter("DEFAULT_THESAURUS_KEY",
-            'local.theme.test'),
+            'external.theme.inspire-theme'),
 
         /**
          * Constant: MAX_FEATURES
@@ -480,7 +440,7 @@ GEOR.config = (function() {
          * Note that it is possible to restrict search to an admin area
          * by specifying either an adminCode1 or adminCode2 or adminCode3
          * See http://download.geonames.org/export/dump/admin1CodesASCII.txt for adminCode1
-         * Aquitaine matches '97' while Bretagne (Brittany) matches 'A2'
+         * Aquitaine-Limousin-Poitou-Charentes matches '75' while Bretagne (Brittany) matches '53'
          */
         GEONAMES_FILTERS: getCustomParameter("GEONAMES_FILTERS", {
             username: 'georchestra', // please replace this username by yours !
@@ -488,7 +448,7 @@ GEOR.config = (function() {
             // It is then required to enable your account to query the free web services
             // by visiting http://www.geonames.org/manageaccount
             country: 'FR',         // France
-            //adminCode1: '97',    // Region
+            //adminCode1: '75',    // Region
             style: 'short',        // verbosity of results
             lang: 'fr',
             featureClass: 'P',     // class category: populated places

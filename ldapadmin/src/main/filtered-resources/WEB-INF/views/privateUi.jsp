@@ -1,3 +1,24 @@
+<%--
+
+ Copyright (C) 2009-2016 by the geOrchestra PSC
+
+ This file is part of geOrchestra.
+
+ geOrchestra is free software: you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free
+ Software Foundation, either version 3 of the License, or (at your option)
+ any later version.
+
+ geOrchestra is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License along with
+ geOrchestra.  If not, see <http://www.gnu.org/licenses/>.
+
+--%>
+
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page pageEncoding="UTF-8" %>
 <%@ page isELIgnored="false" %>
@@ -120,6 +141,6 @@ try {
     <script src="js/directives.js"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/underscorejs/1.4.3/underscore-min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/restangular/latest/restangular.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/restangular/1.5.1/restangular.min.js"></script>
   </body>
 </html>

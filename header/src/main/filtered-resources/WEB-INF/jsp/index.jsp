@@ -1,3 +1,24 @@
+<%--
+
+ Copyright (C) 2009-2016 by the geOrchestra PSC
+
+ This file is part of geOrchestra.
+
+ geOrchestra is free software: you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free
+ Software Foundation, either version 3 of the License, or (at your option)
+ any later version.
+
+ geOrchestra is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ more details.
+
+ You should have received a copy of the GNU General Public License along with
+ geOrchestra.  If not, see <http://www.gnu.org/licenses/>.
+
+--%>
+
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -302,10 +323,14 @@ if(sec_roles != null) {
                         <c:when test='<%= catadmin == true %>'>
                         <c:choose>
                             <c:when test='<%= active.equals("geonetwork") %>'>
-                        <li class="active"><a href="/geonetwork/srv/eng/admin"><fmt:message key="catalogue"/></a></li>
+                        <!-- GN2 or GN3 -->
+                        <!--li class="active"><a href="/geonetwork/srv/<%= lang %>/admin"><fmt:message key="catalogue"/></a></li-->
+                        <li class="active"><a href="/geonetwork/srv/<%= lang %>/admin.console"><fmt:message key="catalogue"/></a></li>
                             </c:when>
                             <c:otherwise>
-                        <li><a href="/geonetwork/srv/<%= lang %>/admin"><fmt:message key="catalogue"/></a></li> <!-- FIXME: GN3 -->
+                        <!-- GN2 or GN3 -->
+                        <!--li><a href="/geonetwork/srv/<%= lang %>/admin"><fmt:message key="catalogue"/></a></li-->
+                        <li><a href="/geonetwork/srv/<%= lang %>/admin.console"><fmt:message key="catalogue"/></a></li>
                             </c:otherwise>
                         </c:choose>
                         </c:when>
@@ -359,7 +384,7 @@ if(sec_roles != null) {
         <c:choose>
             <c:when test='<%= anonymous == false %>'>
         <p class="logged">
-            <a href="<%=ldapadm %>account/userdetails"><%=request.getHeader("sec-username") %></a><span class="light"> | </span><a href="/j_spring_security_logout"><fmt:message key="logout"/></a>
+            <a href="<%=ldapadm %>/account/userdetails"><%=request.getHeader("sec-username") %></a><span class="light"> | </span><a href="/j_spring_security_logout"><fmt:message key="logout"/></a>
         </p>
             </c:when>
             <c:otherwise>
