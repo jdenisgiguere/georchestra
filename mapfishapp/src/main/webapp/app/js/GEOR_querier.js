@@ -119,7 +119,7 @@ GEOR.querier = (function() {
      * {OpenLayers.StyleMap} StyleMap used for vectors
      */
     var styleMap = null;
-    
+
     /**
      * Property: cp
      * {Ext.state.Provider} the state provider
@@ -253,6 +253,7 @@ GEOR.querier = (function() {
                     tpl: GEOR.util.getAttributesComboTpl()
                 }
             },
+            toolbarAlign: 'top',
             allowGroups: false,
             noConditionOnInit: true,
             deactivable: true,
