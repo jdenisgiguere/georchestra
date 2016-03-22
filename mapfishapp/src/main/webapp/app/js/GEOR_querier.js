@@ -253,7 +253,8 @@ GEOR.querier = (function() {
                     tpl: GEOR.util.getAttributesComboTpl()
                 }
             },
-            toolbarAlign: 'top',
+            toolbarType: 'tbar',
+            bufferSupport: true,
             allowGroups: false,
             noConditionOnInit: true,
             deactivable: true,
