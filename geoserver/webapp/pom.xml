@@ -1073,7 +1073,7 @@
       <id>geofence</id>
       <properties>
         <packageName>georchestra-geoserver-geofence</packageName>
-        <dockerGeoserverDatadirScmVersion>15.12-geofence</dockerGeoserverDatadirScmVersion>
+        <dockerGeoserverDatadirScmVersion>geofence</dockerGeoserverDatadirScmVersion>
         <dockerImageName>georchestra/geoserver:${geofence}-${project.parent.version}</dockerImageName>
       </properties>
     </profile>
