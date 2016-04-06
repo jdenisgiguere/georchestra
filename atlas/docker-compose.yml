@@ -20,3 +20,5 @@ database:
     - POSTGRES_PASSWORD=georchestra
     - POSTGRES_USER=georchestra
     - POSTGRES_DB=georchestra
+  ports:
+  - 54322:5432
