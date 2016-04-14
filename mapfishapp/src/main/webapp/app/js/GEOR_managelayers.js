@@ -943,6 +943,32 @@ GEOR.managelayers = (function() {
             });
         }
 
+        if (GEOR.Addons.Atlas && (hasEquivalentWFS || isWFS)) {
+            insertSep();
+            //inspired from GEOR_utils
+            var addonsStore, addonAtlas;
+            addonsStore = new Ext.data.JsonStore({
+                fields: ["id", "name", "title", "thumbnail", "description", "group", "options", {
+                    name: "_loaded", defaultValue: false, type: "boolean"
+                }, {
+                    name: "preloaded", defaultValue: false, type: "boolean"
+                }],
+                data: GEOR.config.ADDONS
+            });
+            addonAtlas = new GEOR.Addons["Atlas"](Ext.getCmp("mappanel"), Ext.apply({}, {}, {}));
+            addonAtlas.init(addonsStore.getById("atlas_0"));
+            menuItems.push({
+                iconCls: 'atlas-icon',
+                text: "Atlas",
+                listeners: {
+                    "click": {
+                        fn: addonAtlas.menuAction,
+                        scope: addonAtlas
+                    }
+                },
+            });
+        }
+
         return menuItems;
     };
 

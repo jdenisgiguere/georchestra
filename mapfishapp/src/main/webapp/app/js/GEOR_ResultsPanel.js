@@ -61,6 +61,9 @@ GEOR.ResultsPanel = Ext.extend(Ext.Panel, {
      */
     sfControl: null,
 
+    //TODO doc
+    id: "resultPanel",
+
     /**
      * Property: noDelete
      * {Boolean} do not show the delete button
@@ -394,6 +397,41 @@ GEOR.ResultsPanel = Ext.extend(Ext.Panel, {
                 })
             } 
         ];
+
+        //Loading Addons actions
+        Ext.each(bbar, function(barItem) {
+            var addon, addonStore, r;
+            //Waring, translated string
+            if (barItem.text == tr("Actions")) {
+                Ext.each(GEOR.config.ADDONS, function(addonConfig) {
+                    if (GEOR.tools.getAddonsState()[addonConfig.id] && addonConfig.options.resultPanelAction) {
+                        //inspired from GEOR_utils
+                        addonsStore = new Ext.data.JsonStore({
+                            fields: ["id", "name", "title", "thumbnail", "description", "group", "options", {
+                                name: "_loaded", defaultValue: false, type: "boolean"
+                            }, {
+                                name: "preloaded", defaultValue: false, type: "boolean"
+                            }],
+                            data: GEOR.config.ADDONS
+                        });
+                        r = addonsStore.getById(addonConfig.id);
+
+                        //TODO load default_option (from manifest.json. Check datadir implication
+                        addon = new GEOR.Addons[addonConfig.name](Ext.getCmp("mappanel"),
+                            Ext.apply({},  r.get("options") || {}, {}));
+                        addon.init(addonsStore.getById(addonConfig.id));
+                        barItem.menu.addItem({
+                            text: addon.getText(r),
+                            //TODO read iconCls from config
+                            iconCls: "atlas-icon",
+                            tooltip: addon.getQtip(r),
+                            handler: addon.resultPanelHandler.createCallback(addon),
+                            scope: this
+                        });
+                    }
+                });
+            }
+        });
 
         if (!this.sfControl) {
             // we need to create the SelectFeature control by ourselves
