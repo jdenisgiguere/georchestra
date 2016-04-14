@@ -405,27 +405,12 @@ GEOR.ResultsPanel = Ext.extend(Ext.Panel, {
             if (barItem.text == tr("Actions")) {
                 Ext.each(GEOR.config.ADDONS, function(addonConfig) {
                     if (GEOR.tools.getAddonsState()[addonConfig.id] && addonConfig.options.resultPanelAction) {
-                        //inspired from GEOR_utils
-                        addonsStore = new Ext.data.JsonStore({
-                            fields: ["id", "name", "title", "thumbnail", "description", "group", "options", {
-                                name: "_loaded", defaultValue: false, type: "boolean"
-                            }, {
-                                name: "preloaded", defaultValue: false, type: "boolean"
-                            }],
-                            data: GEOR.config.ADDONS
-                        });
-                        r = addonsStore.getById(addonConfig.id);
-
-                        //TODO load default_option (from manifest.json. Check datadir implication
-                        addon = new GEOR.Addons[addonConfig.name](Ext.getCmp("mappanel"),
-                            Ext.apply({},  r.get("options") || {}, {}));
-                        addon.init(addonsStore.getById(addonConfig.id));
                         barItem.menu.addItem({
-                            text: addon.getText(r),
+                            text: GEOR.tools.addonsCache[addonConfig.id].title,
                             //TODO read iconCls from config
-                            iconCls: "atlas-icon",
-                            tooltip: addon.getQtip(r),
-                            handler: addon.resultPanelHandler.createCallback(addon),
+                            iconCls: GEOR.tools.addonsCache[addonConfig.id].iconCls,
+                            tooltip: GEOR.tools.addonsCache[addonConfig.id].qtip,
+                            handler: GEOR.tools.addonsCache[addonConfig.id].resultPanelHandler.createCallback(GEOR.tools.addonsCache[addonConfig.id]),
                             scope: this
                         });
                     }

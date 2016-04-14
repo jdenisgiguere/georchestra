@@ -537,6 +537,8 @@ GEOR.tools = (function() {
          */
         getAddonsState: function() {
             return previousState;
-        }
+        },
+
+        addonsCache: addonsCache
     };
 })();
