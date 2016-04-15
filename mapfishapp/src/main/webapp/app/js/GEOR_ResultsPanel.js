@@ -400,17 +400,18 @@ GEOR.ResultsPanel = Ext.extend(Ext.Panel, {
 
         //Loading Addons actions
         Ext.each(bbar, function(barItem) {
-            var addon, addonStore, r;
-            //Waring, translated string
+            var addon, addonConfig;
+            //Warning, compare to translated string
             if (barItem.text == tr("Actions")) {
                 Ext.each(GEOR.config.ADDONS, function(addonConfig) {
                     if (GEOR.tools.getAddonsState()[addonConfig.id] && addonConfig.options.resultPanelAction) {
+                        addon = GEOR.tools.getAddon(addonConfig.id);
                         barItem.menu.addItem({
-                            text: GEOR.tools.addonsCache[addonConfig.id].title,
+                            text: addon.title,
                             //TODO read iconCls from config
-                            iconCls: GEOR.tools.addonsCache[addonConfig.id].iconCls,
-                            tooltip: GEOR.tools.addonsCache[addonConfig.id].qtip,
-                            handler: GEOR.tools.addonsCache[addonConfig.id].resultPanelHandler.createCallback(GEOR.tools.addonsCache[addonConfig.id]),
+                            iconCls: addon.iconCls,
+                            tooltip: addon.qtip,
+                            handler: addon.resultPanelHandler.createCallback(addon),
                             scope: this
                         });
                     }

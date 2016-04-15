@@ -539,6 +539,12 @@ GEOR.tools = (function() {
             return previousState;
         },
 
-        addonsCache: addonsCache
+        /**
+         * APIMethod: getAddon
+         * @param: addonId - Unique identifier of addon (id in config.json)
+         */
+        getAddon: function(addonId) {
+            return addonsCache[addonId];
+        }
     };
 })();
