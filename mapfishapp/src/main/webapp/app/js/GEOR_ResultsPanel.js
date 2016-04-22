@@ -400,7 +400,8 @@ GEOR.ResultsPanel = Ext.extend(Ext.Panel, {
 
         //Loading Addons actions
         Ext.each(bbar, function(barItem) {
-            var addon, addonConfig;
+            var addon, me;
+            me = this;
             //Warning, compare to translated string
             if (barItem.text == tr("Actions")) {
                 Ext.each(GEOR.config.ADDONS, function(addonConfig) {
@@ -408,16 +409,14 @@ GEOR.ResultsPanel = Ext.extend(Ext.Panel, {
                         addon = GEOR.tools.getAddon(addonConfig.id);
                         barItem.menu.addItem({
                             text: addon.title,
-                            //TODO read iconCls from config
                             iconCls: addon.iconCls,
                             tooltip: addon.qtip,
-                            handler: addon.resultPanelHandler.createCallback(addon),
-                            scope: this
+                            handler: addon.resultPanelHandler.createDelegate(this,[me, addon],true)
                         });
                     }
                 });
             }
-        });
+        }, this);
 
         if (!this.sfControl) {
             // we need to create the SelectFeature control by ourselves
