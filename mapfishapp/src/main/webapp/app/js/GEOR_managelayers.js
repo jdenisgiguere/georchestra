@@ -944,8 +944,7 @@ GEOR.managelayers = (function() {
         }
 
         //Loading Addons actions
-        var addon, me;
-        me = this;
+        var addon;
         
         Ext.each(GEOR.config.ADDONS, function(addonConfig) {
             if (GEOR.tools.getAddonsState()[addonConfig.id] && addonConfig.options.layerTreeAction) {
@@ -957,12 +956,12 @@ GEOR.managelayers = (function() {
                     qtip: addon.qtip,
                     listeners: {
                         "click": {
-                            fn: addon.layerTreeHandler.createDelegate(this, [me, addon], true)
+                            fn: addon.layerTreeHandler.createDelegate(addon, [layerRecord], true)
                         }
                     },
                 });
             }
-                }, this);
+                });
 
         return menuItems;
     };
