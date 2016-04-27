@@ -398,10 +398,13 @@ GEOR.ResultsPanel = Ext.extend(Ext.Panel, {
             } 
         ];
 
-        //Loading Addons actions
+        /**Loading Addons actions
+         *
+         * Addons must have options.resultPanelAction === true and
+         *  API method resultPanelHandler(menuitem, event, resultPanel). In this API method, this is the addon.
+         */
+        var addon;
         Ext.each(bbar, function(barItem) {
-            var addon, me;
-            me = this;
             //Warning, compare to translated string
             if (barItem.text == tr("Actions")) {
                 Ext.each(GEOR.config.ADDONS, function(addonConfig) {
@@ -411,7 +414,7 @@ GEOR.ResultsPanel = Ext.extend(Ext.Panel, {
                             text: addon.title,
                             iconCls: addon.iconCls,
                             tooltip: addon.qtip,
-                            handler: addon.resultPanelHandler.createDelegate(addon,[me],true)
+                            handler: addon.resultPanelHandler.createDelegate(addon,[this],true)
                         });
                     }
                 });
