@@ -417,7 +417,7 @@ GEOR.ResultsPanel = Ext.extend(Ext.Panel, {
                             handler: addon.resultPanelHandler.createDelegate(addon,[this],true)
                         });
                     }
-                });
+                }, this);
             }
         }, this);
 
