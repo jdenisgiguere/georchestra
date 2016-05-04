@@ -342,6 +342,30 @@ GEOR.managelayers = (function() {
         };
     };
 
+    //FIXME - Detailled review required
+    var createNoteButton = function(layerRecord) {
+        return new GeoExt.Action({
+            map: layerRecord.get("layer").map,
+            iconCls: "addon-urbanisme",
+            control: new OpenLayers.Control.WMSGetFeatureInfo({
+                layers: [layerRecord.get("layer")],
+                infoFormat: 'application/vnd.ogc.gml',
+                eventListeners: {
+                    "getfeatureinfo" : function(resp) {
+                        var parcelle;
+                        //TODO retrieve the id using the feature
+                        //matricule = resp.features.attributes.idParcelle
+                        parcelle = "350238000BX0285"
+                        GEOR.tools.getAddon("urbanisme_0").parcelleAction(parcelle);
+                    }
+                }
+            }),
+            toggleGroup: "map",
+            tooltip: "Renseignement d'urbanisme sur la parcelle",
+        });
+    };
+
+
     /**
      * Method: createFormatMenu
      *
@@ -1042,7 +1066,7 @@ GEOR.managelayers = (function() {
         var layerRecord = node.layerStore.getById(layer.id);
 
         // buttons in the toolbar
-        var buttons = [createInfoButton(layerRecord),
+        var buttons = [createInfoButton(layerRecord), createNoteButton(layerRecord),
         {
             text: tr("Actions"),
             menu: new Ext.menu.Menu({
@@ -1155,6 +1179,7 @@ GEOR.managelayers = (function() {
         var panelItems = [{
             xtype: "toolbar",
             cls: "geor-toolbar",
+            //FIXME Addons insert button here?
             buttons: buttons
         }];
         if (GEOR.config.DISPLAY_VISIBILITY_RANGE) {
