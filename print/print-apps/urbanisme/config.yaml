@@ -4,15 +4,22 @@ templates:
     A4 portrait: !template
         reportTemplate: A4_Portrait.jrxml
         attributes:
-            title: !string {}
-            subtitle: !string {}
-            codeSection: !string {}
+            parcelleTitle: !string {}
+            codeSectionFull: !string {}
+            numero: !string {}
+            adresseCadastrale: !string {}
+            contenanceDGFiP: !string {}
+            surfaceSIG: !string {}
+            codeProprio: !string {}
+            nomProprio: !string {}
+            adresseProprio: !string {}
+            libelle: !string {}
             legendURL: !string
                 default: ""
             map: !map
                 maxDpi: 254
                 width: 555
-                height: 320
+                height: 280
         processors:
           - !reportBuilder # compile all reports in current directory
             directory: '.'
