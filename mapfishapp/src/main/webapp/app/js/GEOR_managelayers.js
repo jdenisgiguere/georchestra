@@ -1078,6 +1078,18 @@ GEOR.managelayers = (function() {
             })
         }];
 
+        //Patch to allow inclusion of urbanisme addon action if layer is added after loading the addon
+        if (GEOR.tools.getAddon("urbanisme_0")) {
+            if (layerRecord.get("name") === GEOR.tools.getAddon("urbanisme_0").options.parcellesCadastralesLayer) {
+                GEOR.tools.getAddon("urbanisme_0").parcellesCadastralesLayer = layerRecord.get("layer");
+                buttons.splice(0, 0, GEOR.tools.getAddon("urbanisme_0").createRenseignUrbaAction(layerRecord.get("layer")));
+            } else if (layerRecord.get("name") === GEOR.tools.getAddon("urbanisme_0").options.zonesPluLayer) {
+                GEOR.tools.getAddon("urbanisme_0").zonesPluLayer = layerRecord.get("layer");
+                buttons.splice(0, 0, GEOR.tools.getAddon("urbanisme_0").createZonagePluAction(layerRecord.get("layer")));
+            }
+        }
+        //end of urbanisme addon patch
+
         if (GEOR.edit) {
             buttons.push({
                 xtype: "splitbutton",
